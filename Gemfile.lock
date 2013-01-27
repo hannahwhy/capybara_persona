@@ -50,4 +50,5 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber
+  selenium-webdriver
   sinatra

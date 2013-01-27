@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>BrowserID test</title>
+  </head>
+  <body>
+    <button id="sign-in">Sign in</button>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://127.0.0.1:10002/include.js"></script>
+
+    <script>
+      $(function () {
+        var nid = navigator.id;
+
+        $('#sign-in').click(function () {
+          nid.request({});
+        });
+
+        nid.watch({
+          onlogin: function (assertion) {
+            console.log(assertion);
+          },
+          onlogout: function () {
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
