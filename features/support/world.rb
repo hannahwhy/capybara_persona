@@ -14,6 +14,10 @@ class TestWorld
                           end
                         end
   end
+
+  def reset_persona_window
+    @persona_window = nil
+  end
 end
 
 World do

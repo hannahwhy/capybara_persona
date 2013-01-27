@@ -14,13 +14,15 @@ Feature: Signing in
 
     Then I am prompted to create a password
 
-  Scenario: Logging in
+  Scenario: Signing in
     Given the Persona sign-in window is open
     And the email address "test@example.org" uses password "password"
 
-    When I provide the email address "test@example.org"
+    When I am at "/"
+    And I click "Sign in"
+    And I provide the email address "test@example.org"
     And I provide the password "password"
 
-    Then I am logged in
+    Then I am signed in
 
 # vim:ts=2:sw=2:et:tw=78
