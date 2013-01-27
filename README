@@ -1,0 +1,6 @@
+There are currently no tools available for performing automated testing of Web
+applications that use Mozilla Persona as their sole login mechanism.  This is
+an investigation to change that.
+
+More specifically, this is a repository that may eventually contain a library
+for use with Cucumber, Capybara, and WebDriver for automating Persona sign-in.
