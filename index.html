@@ -4,6 +4,8 @@
   </head>
   <body>
     <button id="sign-in">Sign in</button>
+    <div id="feedback">
+    </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="http://127.0.0.1:10002/include.js"></script>
 
@@ -11,15 +13,35 @@
       $(function () {
         var nid = navigator.id;
 
+        function signInPassed(res, status, xhr) {
+          $('#feedback').text('Signed in');
+        }
+
+        function signInFailed(xhr, status, err) {
+          $('#feedback').text('Sign-in failed');
+        }
+
         $('#sign-in').click(function () {
           nid.request({});
         });
 
         nid.watch({
           onlogin: function (assertion) {
-            console.log(assertion);
+            $.ajax({
+              type: 'POST',
+              url: '/verify',
+              data: {
+                assertion: assertion
+              }
+            }).done(signInPassed).fail(signInFailed);
           },
           onlogout: function () {
+            $.ajax({
+              type: 'POST',
+              url: '/signOut'
+            });
+
+            $('#feedback').text('')
           }
         });
       });

@@ -10,18 +10,17 @@ Feature: Signing in
   Scenario: Registering a new email address
     Given the Persona sign-in window is open
 
-    When I provide the email address "test@example.org"
+    When I provide the email address "newuser@example.org"
 
     Then I am prompted to create a password
 
   Scenario: Signing in
-    Given the Persona sign-in window is open
-    And the email address "test@example.org" uses password "password"
+    Given I am at "/"
 
-    When I am at "/"
     And I click "Sign in"
     And I provide the email address "test@example.org"
     And I provide the password "password"
+    And I submit my credentials
 
     Then I am signed in
 

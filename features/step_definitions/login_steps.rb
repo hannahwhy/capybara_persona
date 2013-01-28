@@ -7,7 +7,6 @@ end
 
 Given /^I am at "(.*?)"$/ do |path|
   visit path
-  reset_persona_window
 end
 
 When /^I click "(.*?)"$/ do |name|
@@ -23,15 +22,17 @@ end
 
 When /^I provide the password "(.*?)"$/ do |password|
   within_persona_window do
-    fill_in 'password', :with => password
+    fill_in 'authentication_password', :with => password
   end
 end
 
-When /^I provide the verified password "(.*?)"$/ do |password|
+When /^I submit my credentials$/ do
   within_persona_window do
-    fill_in 'password', :with => password
-    fill_in 'vpassword', :with => password
-    click_button 'done'
+    click_button 'sign in'
+
+    if has_button?('This session only')
+      click_button 'This session only'
+    end
   end
 end
 
@@ -41,18 +42,12 @@ Then /^I am prompted to create a password$/ do
   end
 end
 
-Then /^I am prompted to check my email$/ do
-  within_persona_window do
-    page.should have_content('Confirm your email address')
-  end
-end
-
 Then /^the BrowserID window appears$/ do
   within_persona_window do
     page.should have_content('Persona')
   end
 end
 
-Then /^I am logged in$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I am signed in$/ do
+  page.should have_content('Signed in')
 end
