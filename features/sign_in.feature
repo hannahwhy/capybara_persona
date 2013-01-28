@@ -5,20 +5,18 @@ Feature: Signing in
   Scenario: Clicking the sign in button
     When I click "Sign in"
 
-    Then the BrowserID window appears
+    Then the Persona window appears
 
   Scenario: Registering a new email address
-    Given the Persona sign-in window is open
 
     When I provide the email address "newuser@example.org"
 
     Then I am prompted to create a password
 
   Scenario: Signing in
-    Given I am at "/"
+    Given the Persona sign-in window is open
 
-    And I click "Sign in"
-    And I provide the email address "test@example.org"
+    When I provide the email address "test@example.org"
     And I provide the password "password"
     And I submit my credentials
 

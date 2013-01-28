@@ -1,7 +1,7 @@
 Given /^the Persona sign-in window is open$/ do
   steps %q{
     When I click "Sign in"
-    Then the BrowserID window appears
+    Then the Persona window appears
   }
 end
 
@@ -14,38 +14,23 @@ When /^I click "(.*?)"$/ do |name|
 end
 
 When /^I provide the email address "(.*?)"$/ do |email|
-  within_persona_window do
-    fill_in 'authentication_email', :with => email
-    click_button 'next'
-  end
+  persona.set_email(email)
 end
 
 When /^I provide the password "(.*?)"$/ do |password|
-  within_persona_window do
-    fill_in 'authentication_password', :with => password
-  end
+  persona.set_password(password)
 end
 
 When /^I submit my credentials$/ do
-  within_persona_window do
-    click_button 'sign in'
-
-    if has_button?('This session only')
-      click_button 'This session only'
-    end
-  end
+  persona.submit_credentials
 end
 
 Then /^I am prompted to create a password$/ do
-  within_persona_window do
-    page.should have_content('Please create a password')
-  end
+  persona.state.should == :create_password
 end
 
-Then /^the BrowserID window appears$/ do
-  within_persona_window do
-    page.should have_content('Persona')
-  end
+Then /^the Persona window appears$/ do
+  persona.should have_visible_window
 end
 
 Then /^I am signed in$/ do
