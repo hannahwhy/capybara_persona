@@ -1,5 +1,5 @@
 require 'capybara/cucumber'
-require File.expand_path('../../../app', __FILE__)
+require File.expand_path('../app/app', __FILE__)
 
 Capybara.default_selector = :css
 Capybara.app = App
