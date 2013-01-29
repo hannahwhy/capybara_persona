@@ -1,11 +1,14 @@
 require 'capybara/cucumber'
 require File.expand_path('../app/app', __FILE__)
 
-Capybara.default_selector = :css
 Capybara.app = App
+Capybara.default_driver = Capybara.javascript_driver
+Capybara.default_selector = :css
 
-Capybara.register_driver :selenium_chrome do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+class TestWorld
+  def persona
+    @p ||= Capybara::Persona.new(page)
+  end
 end
 
-Capybara.default_driver = :selenium_chrome
+World { TestWorld.new }
