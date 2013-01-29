@@ -27,7 +27,7 @@ Let's say you have a Cucumber scenario like this:
 
     Feature: Create a new widget
       Scenario: Authenticated users can make widgets
-        Given I sign in as "test@example.org":"foobar"
+        Given I sign in as "test@example.org":"foobar123"
 
         When I go to the new widget page
         And I fill in the data
