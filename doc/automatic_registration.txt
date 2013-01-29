@@ -1,0 +1,79 @@
+1. Automating registration
+
+Automatic registration of users for integration testing is important for a
+couple of reasons:
+
+a. Testing authorization rules often requires specific role sets.  Such a
+   prerequisite requires complete control over the user set.
+b. It is easier to run integration tests when no manual user setup must be
+   done.
+
+One can use the API exported by the Persona Test RP for this purpose.
+
+2. Internet-independent registration
+
+However, I find that it is important to be able to do all of this independent
+of Internet access status.  If you are in the same boat, then try this:
+
+Mozilla's reference BrowserID implementation
+(https://github.com/mozilla/browserid) uses a JSON object as its
+authentication database.  You can find it in $SOURCE_ROOT/var/authdb.json.
+The JSON structure as of 2013-01-29 is as follows:
+
+    {
+        "idp": {}, 
+        "staged": {}, 
+        "stagedEmails": {}, 
+        "users": [
+            {
+                "emails": {
+                    "test@example.org": {
+                        "type": "secondary", 
+                        "verified": true
+                    }
+                }, 
+                "id": 1, 
+                "lastPasswordReset": 1359450152, 
+                "password": "$2a$12$/FCAmNSDkfD75A1Fll7gOeywuC.if4qQWjWn.m2rTgE./x3rERFt."
+            }
+        ]
+    }
+
+Using your favorite language and JSON library, it is possible to add entries.
+For my taste, this is a bit too far into the guts of BrowserID; however, I've
+yet to find a better solution.
+
+The file should be changed while the BrowserID daemon is not running.
+
+The password is encrypted using bcrypt; the default work factor used by the
+BrowserID code is 12.  Here's how you might add a user via a Ruby program:
+
+    require 'bcrypt'
+    require 'json'
+
+    WORK_FACTOR = 12
+    AUTHDB_PATH = 'var/authdb.json'
+
+    user = 'foo@example.com'
+    pw = BCrypt::Password.create('supersekrit', :cost => WORK_FACTOR)
+    db = JSON.parse(File.read(AUTHDB_PATH))
+
+    next_id = db['users'].map { |u| u['id'] }.max + 1
+
+    db['users'] << {
+      emails: {
+        "#{user}" => {
+          type: 'secondary',
+          verified: true
+        }
+      },
+      id: next_id,
+      lastPasswordReset: Time.now.to_i,
+      password: pw
+    }
+
+    File.open(AUTHDB_PATH, 'w') { |f| f.write(db.to_json) }
+
+As I said, it is a bit gross.  Better solutions appreciated.
+
+# vim:ts=2:sw=2:et:tw=78

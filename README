@@ -1,6 +1,75 @@
-There are currently no tools available for performing automated testing of Web
-applications that use Mozilla Persona as their sole login mechanism.  This is
-an investigation to change that.
+1. capybara-persona
 
-More specifically, this is a repository that may eventually contain a library
-for use with Cucumber, Capybara, and WebDriver for automating Persona sign-in.
+Developers building Web applications that use Mozilla Persona for
+authentication have a few choices when it comes to subjecting authenticated
+actions to automated integration testing:
+
+a. Don't
+b. Use a non-Persona authentication flow
+c. Use Persona for authentication
+
+(a) is usually not acceptable.  (b) can work for webapps that support multiple
+authentication flows (i.e. they're using Persona as an alternate
+authentication mechanism), but leaves webapps that use Persona exclusively out
+in the cold.
+
+(c) is nice, but the author found no such tools for Capybara/Cucumber
+integration testing.  Hence this library.
+
+This library provides an object that can be used to sign in using Mozilla
+Persona.  It assumes that registration will be handled over a separate
+channel.  See doc/automatic_registration.txt for possible solutions to the
+problem of automatic registration.
+
+2. Usage
+
+Let's say you have a Cucumber scenario like this:
+
+    Feature: Create a new widget
+      Scenario: Authenticated users can make widgets
+        Given I sign in as "test@example.org":"foobar"
+
+        When I go to the new widget page
+        And I fill in the data
+          | name          | A gadget         |
+          | manufacturer  | Interwidgets LLC |
+        And I press "Save"
+
+        Then I see the widget
+          | name          | A gadget         |
+          | manufacturer  | Interwidgets LLC |
+
+capybara-persona helps implement the sign-in bit.
+
+It's convenient to declare a Capybara::Persona object in the Cucumber world:
+
+    class TestWorld
+      def persona
+        @persona ||= Capybara::Persona.new
+      end
+    end
+
+    World { TestWorld.new }
+
+Then, in your sign-in step:
+
+    Given /^I sign in as "([^"])+":"([^"])+"$/ do |email, password|
+      # how you summon the Persona sign-in screen is app-dependent
+      step %q{When I click "Sign in"}
+
+      persona.set_email(email)
+      persona.set_password(password)
+      persona.submit_credentials
+
+      step %q{Then I see some indication that I've signed in}
+    end
+
+Capybara::Persona is built on top of Capybara's synchronization code, and will
+wait for e.g. the Persona window to appear and disappear.
+
+3. License
+
+Copyright 2013 David Yip.  capybara-persona is released under the MIT license.
+
+
+# vim:ts=2:sw=2:et:tw=78
