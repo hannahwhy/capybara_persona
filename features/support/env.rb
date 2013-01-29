@@ -1,4 +1,7 @@
+$LOAD_PATH.unshift File.expand_path('../../../lib', __FILE__)
+
 require 'capybara/cucumber'
+require 'capybara/persona'
 require File.expand_path('../app/app', __FILE__)
 
 Capybara.app = App
