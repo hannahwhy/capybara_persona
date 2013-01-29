@@ -7,6 +7,10 @@ class App < Sinatra::Base
     $page
   end
 
+  get '/jquery.min.js' do
+    File.read(File.expand_path('../jquery.min.js', __FILE__))
+  end
+
   post '/verify' do
     status 200
   end
