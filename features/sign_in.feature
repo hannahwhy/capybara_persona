@@ -8,6 +8,7 @@ Feature: Signing in
     Then the Persona window appears
 
   Scenario: Registering a new email address
+    Given the Persona sign-in window is open
 
     When I provide the email address "newuser@example.org"
 
