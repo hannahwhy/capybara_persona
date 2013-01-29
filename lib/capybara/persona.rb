@@ -76,9 +76,9 @@ module Capybara
           session.within_window(h) do
             session.has_xpath?('//title', :text => /Mozilla Persona/)
           end
-        rescue Capybara::ElementNotFound
+        rescue ::Selenium::WebDriver::Error::NoSuchWindowError, Capybara::ElementNotFound
           # OK, the window might have closed before we got to investigate it,
-          # just check out the next one
+          # just check out the next one.
         end
       end
     end
