@@ -23,4 +23,13 @@ Feature: Signing in
 
     Then I am signed in
 
+  Scenario: An incorrect password does not complete sign-in
+    Given the Persona sign-in window is open
+
+    When I provide the email address "test@example.org"
+    And I provide the password "wrongpassword"
+    And I submit my credentials
+
+    Then I am not signed in
+
 # vim:ts=2:sw=2:et:tw=78

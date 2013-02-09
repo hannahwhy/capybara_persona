@@ -36,3 +36,7 @@ end
 Then /^I am signed in$/ do
   page.should have_content('Signed in')
 end
+
+Then /^I am not signed in$/ do
+  page.should_not have_content('Signed in')
+end

@@ -14,4 +14,9 @@ class TestWorld
   end
 end
 
+After('@reset') do
+  click_button 'Sign in'
+  persona.this_is_not_me!
+end
+
 World { TestWorld.new }
