@@ -14,6 +14,7 @@ Feature: Signing in
 
     Then I am prompted to create a password
 
+  @reset
   Scenario: Signing in
     Given the Persona sign-in window is open
 

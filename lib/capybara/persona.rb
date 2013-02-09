@@ -39,6 +39,10 @@ module Capybara
       end
     end
 
+    def this_is_not_me!
+      within_persona_window { session.first('#thisIsNotMe').click }
+    end
+
     def wait_for_completion
       Capybara.default_wait_time.times do
         find_persona_window.nil?
@@ -59,7 +63,7 @@ module Capybara
     end
 
     def persona_window
-      @persona_window ||= find_persona_window.tap do |w|
+      find_persona_window.tap do |w|
         raise 'Unable to find Persona window' unless w
       end
     end
