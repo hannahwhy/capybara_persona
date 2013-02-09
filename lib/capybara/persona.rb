@@ -35,7 +35,7 @@ module Capybara
           end
         end
 
-        wait_for_completion
+        wait_for_signin_completion
       end
     end
 
@@ -43,9 +43,9 @@ module Capybara
       within_persona_window { session.first('#thisIsNotMe').click }
     end
 
-    def wait_for_completion
+    def wait_for_signin_completion
       Capybara.default_wait_time.times do
-        find_persona_window.nil?
+        break if find_persona_window.nil?
         sleep 1
       end
     end
