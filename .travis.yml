@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - jruby
+  - rbx-19mode
+before_script:
+  - "./script/setup_browserid.rb"
