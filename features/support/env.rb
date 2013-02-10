@@ -5,13 +5,21 @@ require 'capybara/persona'
 require File.expand_path('../app/app', __FILE__)
 
 Capybara.app = App
-Capybara.default_driver = Capybara.javascript_driver
 Capybara.default_selector = :css
 
 class TestWorld
   def persona
     @p ||= Capybara::Persona.new(page)
   end
+end
+
+Before do
+  driver = case ENV['DRIVER']
+           when 'chrome' then :chromedriver
+           else :selenium
+           end
+
+  Capybara.current_driver = driver
 end
 
 After do
