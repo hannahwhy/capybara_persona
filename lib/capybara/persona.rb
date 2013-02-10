@@ -13,7 +13,7 @@ module Capybara
     def set_email(email)
       within_persona_window do
         session.fill_in 'authentication_email', :with => email
-        by_classes('button.start.addressInfo').click
+        session.first('button.start.addressInfo').click
       end
     end
 
@@ -25,7 +25,7 @@ module Capybara
 
     def submit_credentials(act_as_computer_owner = false)
       within_persona_window do
-        by_classes('button.returning').click
+        session.first('button.returning').click
 
         if session.has_button?('this_is_not_my_computer')
           if act_as_computer_owner
@@ -70,10 +70,6 @@ module Capybara
       end
     end
     
-    def by_classes(classes)
-      within_persona_window { session.first(classes) }
-    end
-
     def find_persona_window
       handles = session.driver.browser.window_handles
 
