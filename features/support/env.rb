@@ -14,9 +14,9 @@ class TestWorld
   end
 end
 
-After('@reset') do
+After do
   click_button 'Sign in'
-  persona.this_is_not_me!
+  persona.logout
 end
 
 World { TestWorld.new }

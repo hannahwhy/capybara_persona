@@ -39,8 +39,12 @@ module Capybara
       end
     end
 
-    def this_is_not_me!
-      within_persona_window { session.first('#thisIsNotMe').click }
+    def logout
+      within_persona_window do
+        if session.has_css?('#thisIsNotMe')
+          session.first('#thisIsNotMe').click
+        end
+      end
     end
 
     def wait_for_signin_completion
