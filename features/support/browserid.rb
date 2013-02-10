@@ -1,6 +1,9 @@
+require 'fileutils'
 require 'stringio'
 
 BROWSERID_ROOT = File.expand_path('../browserid', __FILE__)
+
+include FileUtils
 
 def assert_shell_ok(command, message)
   `#{command}`
@@ -16,6 +19,10 @@ def verify_prerequisites
 
   # Is the submodule present?
   assert_shell_ok("cd #{BROWSERID_ROOT} && ls -1 .git", 'submodule not checked out')
+end
+
+def setup_browserid_authdb
+  cp File.expand_path('../authdb.json', __FILE__), "#{BROWSERID_ROOT}/var"
 end
 
 def start_browserid
@@ -48,6 +55,7 @@ end
 
 AfterConfiguration do
   verify_prerequisites
+  setup_browserid_authdb
   start_browserid
   sleep 3
 end

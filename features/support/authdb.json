@@ -1,0 +1,18 @@
+{
+    "idp": {}, 
+    "staged": {}, 
+    "stagedEmails": {}, 
+    "users": [
+        {
+            "emails": {
+                "test@example.org": {
+                    "type": "secondary", 
+                    "verified": true
+                }
+            }, 
+            "id": 1, 
+            "lastPasswordReset": 1359450152, 
+            "password": "$2a$12$/FCAmNSDkfD75A1Fll7gOeywuC.if4qQWjWn.m2rTgE./x3rERFt."
+        }
+    ]
+}
