@@ -31,16 +31,18 @@ def start_browserid
     $pid = Process.spawn('node', './scripts/run_locally.js', { :out=>"/dev/null" })
     puts "BrowserID daemon starting as PID #{$pid}"
 
-    ok = (1..30).each do |i|
+    threshold = 45
+
+    status = (1..threshold).each do |i|
       cmd = "curl -s http://127.0.0.1:10002"
-      puts "Attempt #{i}/30: #{cmd}"
+      puts "Attempt #{i}/45: #{cmd}"
       `#{cmd}`
 
-      break true if $?.success?
+      break :started if $?.success?
       sleep 1
     end
 
-    if !ok
+    if status != :started
       abort 'BrowserID platform failed to start'
     end
   end
