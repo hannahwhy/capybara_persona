@@ -11,7 +11,7 @@ When /^I submit my credentials$/ do
 end
 
 Then /^I am prompted to create a password$/ do
-  persona.state.should == :create_password
+  persona.should be_asking_to_create_password
 end
 
 Then /^the Persona window appears$/ do

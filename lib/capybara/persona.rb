@@ -54,11 +54,9 @@ module Capybara
       end
     end
 
-    def state
+    def asking_to_create_password?
       within_persona_window do
-        if session.has_content?('Please create a password')
-          :create_password
-        end
+        session.has_content?('Please create a password')
       end
     end
 
