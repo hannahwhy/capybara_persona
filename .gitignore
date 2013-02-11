@@ -2,3 +2,4 @@
 *.sw?
 .rbx
 Gemfile.lock
+.DS_Store
