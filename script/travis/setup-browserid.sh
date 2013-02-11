@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -xe
+
 BROWSERID_PATH=$TRAVIS_BUILD_DIR/features/support/browserid
 cd $BROWSERID_PATH
 
