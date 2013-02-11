@@ -14,5 +14,5 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
   - "sudo sh -c 'cat script/hosts > /etc/hosts'"
 before_script:
-  - "./script/setup_browserid.rb"
+  - "./script/setup-browserid.sh"
   - "./script/install-chrome-driver.sh"
