@@ -1,18 +1,23 @@
+---
 language: ruby
 rvm:
-  - 1.9.3
-  - rbx-19mode
+- 1.9.3
+- rbx-19mode
 env:
-  secure: "C7ykJsEXx+w/rbgjd7HlGLPZm8JzIIMky1UMrIRprnW/y4whV/bmgdXNgdoZ\nnILIJImHhLcLnnVoKSD9rk7aNeGUO7Psy4DubRGFea6RH373R6fes4sfb1zk\nXSWJZx9nqBBoeEG/kUlfzP5yiokFwqsGFIS4CQWu+SEezcDATt0="
+  secure: ! 'C7ykJsEXx+w/rbgjd7HlGLPZm8JzIIMky1UMrIRprnW/y4whV/bmgdXNgdoZ
+
+    nILIJImHhLcLnnVoKSD9rk7aNeGUO7Psy4DubRGFea6RH373R6fes4sfb1zk
+
+    XSWJZx9nqBBoeEG/kUlfzP5yiokFwqsGFIS4CQWu+SEezcDATt0='
   global:
-    - PATH=/tmp/bin:$PATH
+  - PATH=/tmp/bin:$PATH
   matrix:
-    - DRIVER=chrome
-    - DRIVER=selenium
+  - DRIVER=chrome
+  - DRIVER=selenium
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "sudo apt-get install imagemagick"
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sudo apt-get install imagemagick
 before_script:
-  - "./script/setup_browserid.rb"
-  - "./script/install-chrome-driver.sh"
+- ./script/setup_browserid.rb
+- ./script/install-chrome-driver.sh
