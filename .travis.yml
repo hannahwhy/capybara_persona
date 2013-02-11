@@ -3,6 +3,7 @@ rvm:
   - 1.9.3
   - rbx-19mode
 env:
+  secure: "C7ykJsEXx+w/rbgjd7HlGLPZm8JzIIMky1UMrIRprnW/y4whV/bmgdXNgdoZ\nnILIJImHhLcLnnVoKSD9rk7aNeGUO7Psy4DubRGFea6RH373R6fes4sfb1zk\nXSWJZx9nqBBoeEG/kUlfzP5yiokFwqsGFIS4CQWu+SEezcDATt0="
   global:
     - PATH=/tmp/bin:$PATH
   matrix:
