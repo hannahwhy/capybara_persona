@@ -28,7 +28,7 @@ end
 def start_browserid
   Dir.chdir(BROWSERID_ROOT) do
     sio = StringIO.new
-    $pid = Process.spawn('node', './scripts/run_locally.js', { :out=>"/dev/null" })
+    $pid = Process.spawn('node', './scripts/run_locally.js', { :out=>"/tmp/browserid.log" })
     puts "BrowserID daemon starting as PID #{$pid}"
 
     threshold = 45

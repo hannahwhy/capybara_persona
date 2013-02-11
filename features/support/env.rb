@@ -36,7 +36,7 @@ end
 
 at_exit do
   Dir.chdir('/tmp') do
-    `tar zcvf shots.tar.gz shots`
+    `tar zcvf shots.tar.gz shots browserid.log`
   end
 
   AWS::S3::Base.establish_connection!(
