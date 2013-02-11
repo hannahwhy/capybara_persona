@@ -5,7 +5,6 @@ require 'capybara/persona'
 require File.expand_path('../app/app', __FILE__)
 
 Capybara.app = App
-Capybara.default_wait_time = 60
 Capybara.default_selector = :css
 
 class TestWorld
