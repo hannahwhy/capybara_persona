@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-cd $TRAVIS_BUILD_DIR/features/support/browserid
+BROWSERID_PATH=$TRAVIS_BUILD_DIR/features/support/browserid
+cd $BROWSERID_PATH
 
 echo 'Installing BrowserID dependencies...'
 npm install > /tmp/browserid_setup.log 2>&1
