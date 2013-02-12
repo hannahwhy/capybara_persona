@@ -1,7 +1,7 @@
 require 'aws/s3'
 
 module Artifacts
-  AWS_PARAMETERS = %w(AWS_ACCESS_KEY_ID AWS_S3_BUCKET AWS_SECRET_ACCESS_KEY)
+  AWS_PARAMETERS = %w(ACCESS_KEY_ID AWS_S3_BUCKET SECRET_ACCESS_KEY)
 
   include AWS::S3
 
@@ -20,8 +20,8 @@ module Artifacts
 
   def establish_s3_connection!
     AWS::S3::Base.establish_connection!(
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      :access_key_id => ENV['ACCESS_KEY_ID'],
+      :secret_access_key => ENV['SECRET_ACCESS_KEY']
     )
   end
 
