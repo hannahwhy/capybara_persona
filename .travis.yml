@@ -15,4 +15,5 @@ before_install:
   - "sudo sh -c 'cat script/travis/hosts > /etc/hosts'"
 before_script:
   - "./script/travis/setup-browserid.sh"
+  - "bundle exec rake servers:browserid:start > /tmp/browserid.log 2>&1 &"
   - "./script/install-chrome-driver.sh"
