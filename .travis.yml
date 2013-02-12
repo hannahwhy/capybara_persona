@@ -5,7 +5,7 @@ rvm:
   - rbx-19mode
 env:
   global:
-    - secure: "dyVxqDHzt6pMtjEYvM35OdNaWaENtBePNnqNLNjdc4QRXRZvXoubttUDuC3m\n8AUr2dBRkZ4Ua8JIqAasBd8LR17tiYkvHOa8M+zi1SjEEJXFXj1dfdw51lLP\nv5zfuvFm1yRgjgx2AGG5zGsmQbyv9knlOaOQNY/uBS14M49H4Ck="
+    - secure: ! 'C7ykJsEXx+w/rbgjd7HlGLPZm8JzIIMky1UMrIRprnW/y4whV/bmgdXNgdoZnILIJImHhLcLnnVoKSD9rk7aNeGUO7Psy4DubRGFea6RH373R6fes4sfb1zkXSWJZx9nqBBoeEG/kUlfzP5yiokFwqsGFIS4CQWu+SEezcDATt0='
     - AWS_S3_BUCKET=capybara_persona
     - BROWSERID_LOG=/tmp/browserid.log
     - PATH=/tmp/bin:$PATH
