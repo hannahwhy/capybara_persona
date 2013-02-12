@@ -2,7 +2,7 @@
 
 set -xe
 
-BROWSERID_PATH=eval "echo $TRAVIS_BUILD_DIR/features/support/browserid"
+eval BROWSERID_PATH=$TRAVIS_BUILD_DIR/features/support/browserid
 cd $BROWSERID_PATH
 
 echo 'Installing BrowserID dependencies...'
