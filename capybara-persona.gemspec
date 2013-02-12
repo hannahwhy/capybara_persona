@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'capybara'
 
+  gem.add_development_dependency 'aws-s3'
   gem.add_development_dependency 'cucumber'
   gem.add_development_dependency 'json'
   gem.add_development_dependency 'rake'

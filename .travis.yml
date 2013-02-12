@@ -5,6 +5,9 @@ rvm:
   - rbx-19mode
 env:
   global:
+    - secure: "dyVxqDHzt6pMtjEYvM35OdNaWaENtBePNnqNLNjdc4QRXRZvXoubttUDuC3m\n8AUr2dBRkZ4Ua8JIqAasBd8LR17tiYkvHOa8M+zi1SjEEJXFXj1dfdw51lLP\nv5zfuvFm1yRgjgx2AGG5zGsmQbyv9knlOaOQNY/uBS14M49H4Ck="
+    - AWS_S3_BUCKET=capybara_persona
+    - BROWSERID_LOG=/tmp/browserid.log
     - PATH=/tmp/bin:$PATH
   matrix:
     - DRIVER=chrome
@@ -15,5 +18,5 @@ before_install:
   - "sudo sh -c 'cat script/travis/hosts > /etc/hosts'"
 before_script:
   - "./script/travis/setup-browserid.sh"
-  - "bundle exec rake servers:browserid:start > /tmp/browserid.log 2>&1 &"
+  - "bundle exec rake servers:browserid:start > $BROWSERID_LOG 2>&1 &"
   - "./script/install-chrome-driver.sh"
