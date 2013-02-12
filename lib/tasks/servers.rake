@@ -4,9 +4,7 @@ namespace :servers do
   namespace :browserid do
     desc 'Start the BrowserID platform'
     task :start do
-      Dir.chdir(BrowserID::ROOT) do
-        exec('node', './scripts/run_locally.js')
-      end
+      exec("cd #{BrowserID::ROOT} && exec node scripts/run_locally.js")
     end
   end
 end
