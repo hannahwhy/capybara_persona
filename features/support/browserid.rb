@@ -1,9 +1,14 @@
 require 'fileutils'
 require 'stringio'
+require 'tmpdir'
 
 BROWSERID_ROOT = File.expand_path('../browserid', __FILE__)
 
 include FileUtils
+
+$artifact_dir = ENV['ARTIFACT_DIR'] || Dir.mktmpdir
+$log_file = "#{$artifact_dir}/browserid.log"
+puts "Writing BrowserID log to #{$log_file}"
 
 def assert_shell_ok(command, message)
   `#{command}`
@@ -27,8 +32,7 @@ end
 
 def start_browserid
   Dir.chdir(BROWSERID_ROOT) do
-    sio = StringIO.new
-    $pid = Process.spawn('node', './scripts/run_locally.js', { :out=>"/dev/null" })
+    $pid = Process.spawn('node', './scripts/run_locally.js', { :out=>$log_file })
     puts "BrowserID daemon starting as PID #{$pid}"
 
     threshold = 45
