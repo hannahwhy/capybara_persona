@@ -51,7 +51,12 @@ end
 def stop_browserid
   if $pid
     Process.kill('INT', $pid)
-    Process.wait($pid)
+
+    begin
+      Process.wait($pid)
+    rescue Errno::ECHILD
+      # must have died before we got to wait, oh well
+    end
   end
 end
 
