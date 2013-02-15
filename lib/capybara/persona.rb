@@ -44,8 +44,6 @@ module Capybara
             session.click_button 'this_is_my_computer'
           end
         end
-
-        wait_for_signin_completion
       end
     end
 
@@ -54,13 +52,6 @@ module Capybara
         if session.has_css?('#thisIsNotMe')
           session.first('#thisIsNotMe').click
         end
-      end
-    end
-
-    def wait_for_signin_completion
-      Capybara.default_wait_time.times do
-        break if find_persona_window.nil?
-        sleep 1
       end
     end
 
