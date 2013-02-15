@@ -10,6 +10,16 @@ module Capybara
       persona_window
     end
 
+    def ready?
+      visible? && connected?
+    end
+
+    def connected?
+      within_persona_window do
+        !session.first('#wait').visible?
+      end
+    end
+
     def set_email(email)
       within_persona_window do
         session.fill_in 'authentication_email', :with => email

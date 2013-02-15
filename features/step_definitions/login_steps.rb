@@ -2,6 +2,7 @@ Given /^the Persona sign-in window is open$/ do
   steps %q{
     When I click "Sign in"
     Then the Persona window appears
+    And the Persona window is ready for login
   }
 end
 

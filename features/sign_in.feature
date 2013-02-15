@@ -6,6 +6,7 @@ Feature: Signing in
     When I click "Sign in"
 
     Then the Persona window appears
+    And the Persona window is ready for login
 
   Scenario: Registering a new email address
     Given the Persona sign-in window is open

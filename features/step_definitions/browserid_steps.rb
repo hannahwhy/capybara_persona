@@ -17,3 +17,7 @@ end
 Then /^the Persona window appears$/ do
   persona.should have_visible_window
 end
+
+Then /^the Persona window is ready for login$/ do
+  persona.should be_ready
+end
