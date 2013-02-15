@@ -37,7 +37,7 @@ module Artifacts
 
   def archive_captures
     archive = "#{capture_dir}/captures.tar.gz"
-    `tar xzf #{archive} #{capture_dir}/*.png`
+    `tar czf #{archive} #{capture_dir}/*.png`
     S3Object.store("captures-#{build_tag}.tar.gz", open(archive), artifact_bucket)
   end
 
