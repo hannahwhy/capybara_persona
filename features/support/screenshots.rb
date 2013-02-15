@@ -8,7 +8,7 @@ if ENV['CAPTURE_DIR']
   AfterStep do |scenario|
     cdir = ENV['CAPTURE_DIR']
     now = Time.now.to_f
-    fn = Shellwords.escape("#{cdir}/#{scenario.title}-#{now}.png")
+    fn = Shellwords.escape("#{cdir}/#{now}-#{scenario.title}.png")
     `import -window root #{fn}`
   end
 end
