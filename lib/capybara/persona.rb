@@ -6,8 +6,8 @@ module Capybara
       @session = session
     end
 
-    def has_visible_window?
-      persona_window
+    def visible?
+      find_persona_window
     end
 
     def ready?

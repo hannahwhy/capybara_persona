@@ -15,7 +15,7 @@ Then /^I am prompted to create a password$/ do
 end
 
 Then /^the Persona window appears$/ do
-  persona.should have_visible_window
+  persona.should be_visible
 end
 
 Then /^the Persona window is ready for login$/ do
