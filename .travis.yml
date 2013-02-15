@@ -8,6 +8,7 @@ env:
     - secure: ! 'C7ykJsEXx+w/rbgjd7HlGLPZm8JzIIMky1UMrIRprnW/y4whV/bmgdXNgdoZnILIJImHhLcLnnVoKSD9rk7aNeGUO7Psy4DubRGFea6RH373R6fes4sfb1zkXSWJZx9nqBBoeEG/kUlfzP5yiokFwqsGFIS4CQWu+SEezcDATt0='
     - AWS_S3_BUCKET=capybara_persona
     - BROWSERID_LOG=/tmp/browserid.log
+    - CAPTURE_DIR=/tmp/captures
     - PATH=/tmp/bin:$PATH
   matrix:
     - DRIVER=chrome

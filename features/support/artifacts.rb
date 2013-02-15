@@ -15,6 +15,12 @@ module Artifacts
         archive_log
         puts "OK"
       end
+
+      if capture_dir && File.directory?(capture_dir)
+        puts "Archiving screen captures"
+        archive_captures
+        puts "OK"
+      end
     end
   end
 
@@ -29,8 +35,18 @@ module Artifacts
     S3Object.store("browserid-#{build_tag}.log", open(browserid_log), artifact_bucket)
   end
 
+  def archive_captures
+    archive = "#{capture_dir}/captures.tar.gz"
+    `tar xzf #{archive} #{capture_dir}/*.png`
+    S3Object.store("captures-#{build_tag}.tar.gz", open(archive), artifact_bucket)
+  end
+
   def browserid_log
     ENV['BROWSERID_LOG']
+  end
+
+  def capture_dir
+    ENV['CAPTURE_DIR']
   end
 
   def artifact_bucket
