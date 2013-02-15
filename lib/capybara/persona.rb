@@ -37,11 +37,13 @@ module Capybara
       within_persona_window do
         session.first('button.returning').click
 
-        if session.has_button?('this_is_not_my_computer')
-          if act_as_computer_owner
-            session.click_button 'this_is_not_my_computer'
-          else
-            session.click_button 'this_is_my_computer'
+        expect_vanishing do
+          if session.has_button?('this_is_not_my_computer')
+            if act_as_computer_owner
+              session.click_button 'this_is_not_my_computer'
+            else
+              session.click_button 'this_is_my_computer'
+            end
           end
         end
       end
@@ -75,13 +77,28 @@ module Capybara
       handles = session.driver.browser.window_handles
 
       window = handles.detect do |h|
-        begin
+        expect_vanishing do
           session.within_window(h) do
             session.has_xpath?('//title', :text => /Mozilla Persona/)
           end
-        rescue ::Selenium::WebDriver::Error::NoSuchWindowError, Capybara::ElementNotFound
-          # OK, the window might have closed before we got to investigate it,
-          # just check out the next one.
+        end
+      end
+    end
+
+    def expect_vanishing
+      source = caller(1).first
+
+      begin
+        yield
+      rescue ::Selenium::WebDriver::Error::NoSuchWindowError, Capybara::ElementNotFound
+        # OK, the window closed.  That's fine; we expected it.  Log it and
+        # move on.
+        message = "#{source} needed to do something with a Persona window, but it closed"
+
+        if defined?(logger)
+          logger.info(message)
+        else
+          puts message
         end
       end
     end
