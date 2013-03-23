@@ -2,7 +2,7 @@
 
 set -xe
 
-FILE=chromedriver_linux64_26.0.1383.0.zip
+FILE=chromedriver_linux64_23.0.1240.0.zip
 
 mkdir -p /tmp/bin
 cd /tmp/bin
