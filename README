@@ -41,7 +41,7 @@ Let's say you have a Cucumber scenario like this:
 
 capybara-persona helps implement the sign-in bit.
 
-It's convenient to declare a Capybara::Persona object in the Cucumber world:
+Declare a Capybara::Persona object in the Cucumber world:
 
     class TestWorld
       def persona
@@ -66,6 +66,10 @@ Then, in your sign-in step:
 
 Capybara::Persona is built on top of Capybara's synchronization code, and will
 wait for e.g. the Persona window to appear and disappear.
+
+Because Capybara::Persona clicks through a Persona login flow like a human
+would, it will use the same Persona polyfill and verification backend that
+your webapp uses.
 
 3. License
 

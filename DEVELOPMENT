@@ -1,0 +1,22 @@
+Capybara::Persona sits in the middle of a bunch of things, and unfortunately
+this position makes it a bit difficult and fragile to test.  Nevertheless,
+it's still possible to exercise the codebase.
+
+Here's the short version.  From the root of the source tree:
+
+    $ git submodule update --init   # get the Mozilla BrowserID code
+    $ cd features/support/browserid
+    $ npm install                   # sets up said code
+    $ npm start
+
+In a separate shell, go to the root of the source tree and run
+
+    $ bundle exec rake
+
+This will run capybara-persona's integration tests using the default Selenium
+WebDriver configuration, which usually uses Firefox.  You can use Chromedriver
+if you want:
+
+    $ DRIVER=chrome bundle exec rake
+
+# vim:ts=2:sw=2:et:tw=78
