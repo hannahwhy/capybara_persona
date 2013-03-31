@@ -24,7 +24,7 @@ module BrowserID
     end
 
     if status != :started
-      raise 'BrowserID platform failed to start'
+      raise 'Unable to contact Persona'
     end
   end
 end
